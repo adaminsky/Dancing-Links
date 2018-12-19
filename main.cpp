@@ -1,6 +1,7 @@
 #include "dancinglinks.h"
 #include <iostream>
 #include <new>
+#include <sstream>
 using namespace std;
 
 void solve(Link* r, int k);
@@ -37,16 +38,40 @@ int main() {
   // solve(spacer, 0);						       //
   ///////////////////////////////////////////////////////////////////////
 
-  string testHeaders[] = {"a", "b", "c"};
-  string options1[] = {"a", "c"};
-  string options2[] = {"b"};
-  string options3[] = {"a"};
+  //  string testHeaders[] = {"a", "b", "c"};
+  //  string options1[] = {"a", "c"};
+  // string options2[] = {"b"};
+  //  string options3[] = {"a"};
 
   Link* h = new Link(nullptr, nullptr, nullptr, "");
-  createHeaders(h, testHeaders, 3);
-  addOptions(options1, 2, h);
-  addOptions(options2, 1, h);
-  addOptions(options3, 1, h);
+  //  createHeaders(h, testHeaders, 3);
+  //  addOptions(options1, 2, h);
+  //  addOptions(options2, 1, h);
+  //  addOptions(options3, 1, h);
+
+  string headers[10];
+  int size = 0;
+  string c;
+  string line;
+  getline(cin, line);
+  istringstream iss(line);
+  while(iss >> c) {
+    headers[size] = c;
+    size++;
+  }
+  createHeaders(h, headers, size);
+
+  while(getline(cin, line)) {
+    iss.clear();
+    iss.str(line);
+    string options[10];
+    int i = 0;
+    while(iss >> c) {
+      options[i] = c;
+      i++;
+    }
+    addOptions(options, i, h);
+  }
 
   solve(h, 0);
 }
