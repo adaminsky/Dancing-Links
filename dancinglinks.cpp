@@ -35,6 +35,10 @@ void Link::uncover(Link* p) {
 
 Link::Link(Link* above, Link* left, Link* C, string N) {
   if (above) {
+    if (above->getD()) {
+      above->getD()->setU(this);
+      setD(above->getD());
+    }
     above->setD(this);
     setU(above);
   }
@@ -43,6 +47,10 @@ Link::Link(Link* above, Link* left, Link* C, string N) {
     setU(this);
   }
   if (left) {
+    if (left->getR()) {
+      left->getR()->setL(this);
+      setR(left->getR());
+    }
     left->setR(this);
     setL(left);
   }
