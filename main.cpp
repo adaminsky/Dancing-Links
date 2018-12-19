@@ -10,44 +10,8 @@ void addOptions(string options[], int size, Link* h);
 Link* O[4];
 
 int main() {
-  ///////////////////////////////////////////////////////////////////////
-  // // Creating column headers					       //
-  // Link* spacer = new Link(nullptr, nullptr);			       //
-  // Link* a = new Link(nullptr, spacer, nullptr, "a");		       //
-  // Link* b = new Link(nullptr, a, nullptr, "b");		       //
-  // Link* c = new Link(nullptr, b, nullptr, "c");		       //
-  // c->setR(spacer);						       //
-  // spacer->setL(c);						       //
-  // 								       //
-  // // Adding "links" for each of the ones in the columns and linking //
-  // // them appropriately.					       //
-  // Link* one = new Link(a, nullptr, a);			       //
-  // one->setD(a);						       //
-  // Link* two = new Link(b, nullptr, b);			       //
-  // two->setD(b);						       //
-  // b->setU(two);						       //
-  // Link* three = new Link(one, nullptr, a);			       //
-  // three->setD(a);						       //
-  // a->setU(three);						       //
-  // Link* four = new Link(c, three, c);			       //
-  // four->setD(c);						       //
-  // c->setU(four);						       //
-  // four->setR(three);						       //
-  // three->setL(four);						       //
-  // 								       //
-  // solve(spacer, 0);						       //
-  ///////////////////////////////////////////////////////////////////////
-
-  //  string testHeaders[] = {"a", "b", "c"};
-  //  string options1[] = {"a", "c"};
-  // string options2[] = {"b"};
-  //  string options3[] = {"a"};
-
+  // Creating the "master" head node.
   Link* h = new Link(nullptr, nullptr, nullptr, "");
-  //  createHeaders(h, testHeaders, 3);
-  //  addOptions(options1, 2, h);
-  //  addOptions(options2, 1, h);
-  //  addOptions(options3, 1, h);
 
   string headers[10];
   int size = 0;
@@ -76,6 +40,7 @@ int main() {
   solve(h, 0);
 }
 
+// Create the nodes that represent the columns of the linked list.
 void createHeaders(Link* h, string arr[], int size) {
   Link* tmp = h;
   for (int i = 0; i < size; i++) {
@@ -83,6 +48,8 @@ void createHeaders(Link* h, string arr[], int size) {
   }
 }
 
+// Add each option under its appropriate header and correctly link
+// them together.
 void addOptions(string options[], int size, Link* h) {
   Link* add;
   for (int i = 0; i < size; i++) {
@@ -95,7 +62,8 @@ void addOptions(string options[], int size, Link* h) {
       add = new Link(tmp, add, tmp);
   }
 }   
-    
+
+// Recursively solve the exact cover problem using dancing links.
 void solve(Link* r, int k) {
   Link* c = r->getR();
   if (c == r) {
