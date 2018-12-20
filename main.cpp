@@ -7,13 +7,13 @@ using namespace std;
 void solve(Link* r, int k);
 void createHeaders(Link* h, string arr[], int size);
 void addOptions(string options[], int size, Link* h);
-Link* O[4];
+Link* O[1000];
 
 int main() {
   // Creating the "master" head node.
   Link* h = new Link(nullptr, nullptr, nullptr, "");
 
-  string headers[10];
+  string headers[1000];
   int size = 0;
   string c;
   string line;
@@ -28,7 +28,7 @@ int main() {
   while(getline(cin, line)) {
     iss.clear();
     iss.str(line);
-    string options[10];
+    string options[4];
     int i = 0;
     while(iss >> c) {
       options[i] = c;
